@@ -1,0 +1,409 @@
+/* ── Styles ── */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── WRAP ─────────────────────────────────────────────────────── */
+#wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  padding: 48px 48px 20px 48px;
+  z-index: 2;
+  align-items: flex-start;
+}
+
+/* ── CONTROLS ─────────────────────────────────────────────────── */
+#controls {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: flex-end;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+}
+
+#controls, .ctrlBtn, input, button {
+  -webkit-app-region: no-drag;
+}
+
+.ctrlBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ctrlBtn:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+.ctrlBtn.active {
+  background: rgba(0, 150, 255, 0.5);
+  border-color: rgba(0, 150, 255, 0.7);
+}
+
+.pinned {
+  background: rgba(0, 255, 150, 0.25) !important;
+  border-color: rgba(0, 255, 150, 0.5) !important;
+}
+
+.pinned:hover {
+  background: rgba(0, 255, 150, 0.4) !important;
+}
+
+/* ── SVG Button Icons ─────────────────────────────────────────── */
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+.pinned .btn-icon {
+  fill: rgba(0, 255, 150, 0.9);
+}
+
+.card-icon {
+  width: 12px;
+  height: 12px;
+  fill: white;
+}
+
+/* ── GLASS PANEL ──────────────────────────────────────────────── */
+#glass {
+  display: inline-flex;
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.2) inset,
+    0 4px 16px rgba(0,0,0,0.25);
+  -webkit-app-region: drag;
+  position: relative;
+  transition: opacity 0.2s ease;
+}
+
+body.locked #glass {
+  -webkit-app-region: no-drag;
+}
+
+/* ── LAYOUT MODES ─────────────────────────────────────────────── */
+#hudRow {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+#hud {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+/* ── Row ── */
+#hudRow.layout-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* ── Column ── */
+#hudRow.layout-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#hudRow.layout-column #hud {
+  flex-direction: column;
+}
+
+/* Layout icon toggle */
+.icon-row   { display: block; }
+.icon-column { display: none; }
+
+/* ── CARDS ────────────────────────────────────────────────────── */
+.card {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: inherit;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.card .card-label {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px 6px;
+  background: rgba(0,0,0,0.6);
+  color: rgba(255,255,255,0.9);
+  font-family: system-ui, sans-serif;
+  font-size: 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Edit mode ── */
+.card.edit-mode {
+  cursor: grab;
+  -webkit-app-region: no-drag;
+}
+
+.card.edit-mode:active {
+  cursor: grabbing;
+}
+
+.card.edit-mode .card-actions {
+  display: flex;
+}
+
+.card.edit-mode .card-label {
+  display: block;
+}
+
+.card.dragging-source {
+  opacity: 0.35;
+}
+
+/* ── Card action buttons ── */
+.card-actions {
+  display: none;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  gap: 4px;
+  z-index: 5;
+}
+
+.card-action-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  -webkit-app-region: no-drag;
+}
+
+.card-action-btn.remove {
+  background: rgba(200, 40, 40, 0.85);
+}
+
+.card-action-btn.remove:hover {
+  background: rgba(220, 30, 30, 1);
+}
+
+.card-action-btn.edit {
+  background: rgba(0, 120, 200, 0.85);
+}
+
+.card-action-btn.edit:hover {
+  background: rgba(0, 140, 230, 1);
+}
+
+/* ── Add card ── */
+.add-card {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  border: 2px dashed rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.5);
+  font-size: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  -webkit-app-region: no-drag;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.add-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.8);
+}
+
+.add-card.visible {
+  display: flex;
+}
+
+/* ── WEBVIEW ──────────────────────────────────────────────────── */
+webview {
+  width: 140px;
+  height: 140px;
+  display: block;
+  border: none;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+/* ── First-launch placeholder ─────────────────────────────────── */
+.placeholder-msg.first-launch {
+  width: 220px;
+  height: 140px;
+  border-radius: 12px;
+  border: 2px dashed rgba(0, 150, 255, 0.5);
+  background: rgba(0, 150, 255, 0.08);
+  color: rgba(180, 220, 255, 0.85);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  -webkit-app-region: no-drag;
+}
+
+.placeholder-msg.first-launch:hover {
+  background: rgba(0, 150, 255, 0.16);
+  border-color: rgba(0, 150, 255, 0.75);
+  color: rgba(200, 235, 255, 0.95);
+}
+
+/* ── CONTROLS VISIBILITY ──────────────────────────────────────── */
+#wrap.show-controls #controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── MODAL ────────────────────────────────────────────────────── */
+#modalOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+#modalOverlay.open {
+  display: flex;
+}
+
+#modalDialog {
+  background: rgba(25, 25, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+#modalDialog label {
+  color: rgba(255,255,255,0.6);
+  font-family: system-ui, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+#modalDialog input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: white;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#modalDialog input:focus {
+  border-color: rgba(0, 150, 255, 0.6);
+  background: rgba(255,255,255,0.12);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.modal-actions-right {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+}
+
+.modal-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.modal-btn.primary {
+  background: rgba(0, 150, 255, 0.4);
+  border-color: rgba(0, 150, 255, 0.6);
+}
+
+.modal-btn.primary:hover {
+  background: rgba(0, 150, 255, 0.6);
+}
