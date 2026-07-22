@@ -1,46 +1,40 @@
 {
   "name": "Oracle",
   "productName": "Oracle",
-"version": "1.4.0",
+  "version": "1.5.0",
   "description": "Minimal Reactive Overlay",
   "main": "main.js",
   "author": "Sam",
   "license": "UNLICENSED",
   "private": true,
-
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win portable",
     "poll": "electron poll-sources.js"
   },
-
   "build": {
     "appId": "com.reactivetools.overlay",
     "productName": "Oracle",
-
     "win": {
       "target": [
         {
           "target": "portable",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "artifactName": "Oracle.exe"
     },
-
     "files": [
       "**/*"
     ],
-
     "asar": true,
-
     "compression": "maximum",
-
     "directories": {
       "output": "dist"
     }
   },
-
   "devDependencies": {
     "electron": "^30.0.0",
     "electron-builder": "^24.13.3"
