@@ -20,6 +20,9 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+# Project rules (internal only)
+.*rules
+
 # Personal notes
 To-Do.txt
 
