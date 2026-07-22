@@ -10,7 +10,8 @@
 
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win portable"
+    "build": "electron-builder --win portable",
+    "poll": "electron poll-sources.js"
   },
 
   "build": {

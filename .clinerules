@@ -1,0 +1,45 @@
+# Project Rules for Oracle
+
+## Changelog Maintenance
+- **Always update `CHANGELOG.md`** whenever you make a change to the codebase. Before calling `attempt_completion`, add an entry under the appropriate `###` section in `## Unreleased`.
+- Use the existing format: `- **Entry title** — description`
+- **Section mapping** (follow these categories):
+  - `### Added` — new features, new files, new functionality
+  - `### Changed` — modifications to existing features or behavior
+  - `### Fixed` — bug fixes, error corrections
+  - `### Removed` — deleted features or files
+  - `### Maintenance` — refactors, cleanup, dependency updates, formatting, docs (non-functional changes)
+- If a section doesn't exist yet under `## Unreleased`, create it.
+- Order sections as: Added → Changed → Fixed → Removed → Maintenance
+- Keep entries concise but descriptive — the entry title should clearly identify what changed, and the description should explain the what and why.
+
+### Versioning and Releases
+- The current version is tracked in both `package.json` (`"version"`) and `.release-please-manifest.json`. These must stay in sync.
+- `## Unreleased` holds all changes since the last tagged version. When a release is cut:
+  1. Rename `## Unreleased` → `## X.Y.Z` (using the new version number)
+  2. Add a new empty `## Unreleased` section above it with empty `### Added`, `### Changed`, `### Fixed`, `### Removed`, and `### Maintenance` subsections
+  3. Bump the version in `package.json` and `.release-please-manifest.json`
+- Version bumps follow [Semantic Versioning](https://semver.org/):
+  - **MAJOR** (`X.0.0`): breaking changes, removed features, major rearchitectures
+  - **MINOR** (`0.X.0`): new features, new sections, significant additions
+  - **PATCH** (`0.0.X`): bug fixes, typo fixes, minor tweaks
+- When asked to "release" or "cut a release", perform the version bump and CHANGELOG rotation described above, then commit the result with message `chore(release): bump to vX.Y.Z`.
+
+### Git Commits
+- When you are asked to make commits (e.g., "commit this", "commit changes"), you must also update `CHANGELOG.md` with entries describing what was done before committing.
+- Commit messages should follow Conventional Commits format: `type(scope): description`
+  - Types: `feat` (new feature → Added), `fix` (bug fix → Fixed), `chore` (maintenance → Maintenance), `refactor` (code restructuring → Changed/Maintenance), `docs` (documentation → Maintenance), `style` (formatting → Maintenance), `test` (tests → Maintenance), `perf` (performance → Changed)
+- Commit only the files relevant to the change. If only CHANGELOG was updated, commit only that. If code + CHANGELOG were updated, commit both together.
+
+### Public-Facing Files
+- **Never mention Cline, AI, or any AI tooling** in public-facing files such as `README.md`, `CHANGELOG.md`, documentation, code comments, or any file that could be seen by users or contributors. These files should appear hand-written by a human.
+</content>
+<task_progress>
+- [x] Read through CHANGELOG.md
+- [x] Identify issues and inconsistencies
+- [x] Clean up and reformat the changelog
+- [x] Research existing release-please setup
+- [x] Create project rules for changelog maintenance
+- [x] Log the cleanup in CHANGELOG
+- [x] Add versioning/release and commit rules to .clinerules
+</task_progress>
