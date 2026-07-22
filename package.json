@@ -1,7 +1,7 @@
 {
   "name": "Oracle",
   "productName": "Oracle",
-"version": "1.3.1",
+"version": "1.4.0",
   "description": "Minimal Reactive Overlay",
   "main": "main.js",
   "author": "Sam",

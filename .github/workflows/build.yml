@@ -3,6 +3,9 @@ name: Build and Release Oracle.exe
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - 'v*'
 
 permissions:
   contents: write

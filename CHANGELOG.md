@@ -3,6 +3,18 @@
 ## Unreleased
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+
+### Maintenance
+
+## 1.4.0
+
+### Added
 - **Reactive Hub integration** — dedicated browser window for login and source browsing (`Tray → Reactive Library`)
 - **Automatic source discovery** — hidden background scanner uses MutationObserver on the Reactive sources page to detect new members; extracts labels from `.text-lg.font-semibold` elements
 - **Blacklist system** — when removing a source, its URL is added to a blacklist so it is never re-added automatically; "Clear Blacklist" tray item shows and resets the count
@@ -40,6 +52,5 @@
 - **Tray menu architecture** — menu template separated from tray creation, enabling dynamic rebuild when blacklist changes without recreating the tray icon
 
 ### Maintenance
-- **Changelog cleanup** — merged duplicate `### Added` and `### Fixed` sections, reordered to Added → Changed → Fixed → Maintenance, established `.clinerules` for ongoing manual maintenance
+- **Changelog cleanup** — merged duplicate `### Added` and `### Fixed` sections, reordered to Added → Changed → Fixed → Maintenance
 - **README rewrite** — replaced release-please automation guide with a user-facing description of features, installation, usage, and architecture
-- **`.clinerules`** — added rule prohibiting AI/automation mentions in public-facing files
