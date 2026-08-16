@@ -12,6 +12,13 @@
 
 ### Maintenance
 
+## [1.5.0](https://github.com/SamTheGoat7/Oracle/compare/Oracle-v1.4.0...Oracle-v1.5.0) (2026-07-22)
+
+
+### Features
+
+* architecture refactor, reactive hub integration, source discovery, and blacklist system ([10b0e9d](https://github.com/SamTheGoat7/Oracle/commit/10b0e9d2f1343d97412f46619a6e03578a7ea4aa))
+
 ## 1.4.0
 
 ### Added
